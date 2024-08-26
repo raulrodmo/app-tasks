@@ -32,11 +32,11 @@ export class TaskService {
   }
 
   editTask(task: Task): Observable<any> {
-    return this.http.put(this.tasksUrl + task.name, task);
+    return this.http.put(this.tasksUrl + task.id, task);
   }
 
   deleteTask(id: number): Observable<any> {
-    return this.http.delete(this.tasksUrl + name);
+    return this.http.delete(this.tasksUrl + id);
   }
 
 }

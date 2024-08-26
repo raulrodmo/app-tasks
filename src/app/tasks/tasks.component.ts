@@ -34,14 +34,16 @@ export class TasksComponent implements OnInit {
     this.getTasks();
   }
 
-  private getTasks(): void {
+  private getTasks() {
     this.taskService.getTasks().subscribe({
       next: (tasks) => {
         this.tasks = tasks;
-        this.cdr.detectChanges(); // Força a detecção de mudanças
+        //this.cdr.detectChanges(); // Força a detecção de mudanças
       },
+      
       error: (err) => console.error('Error fetching tasks:', err)
     });
+    console.log('chamou get')
   }
 
   addTask() {
@@ -67,14 +69,15 @@ export class TasksComponent implements OnInit {
     };
   
     // Envia os dados para o serviço
-    this.taskService.createTask(data).subscribe({
-      next: (response) => {
-        console.log('Task added successfully:', response);
-        this.getTasks(); // Atualiza a lista de tarefas
+    this.taskService.createTask(data).subscribe(
+      () => {
+        console.log('Task added successfully:');
         this.resetForm();
-      },
-      error: (err) => console.error('Error adding task:', err)
-    });
+        console.log('passou do reset')
+        this.getTasks(); // Atualiza a lista de tarefas
+      
+      error: () => console.error('Error adding task:')
+    }); 
   }
 
   setTaskEdit(task: Task): void {
@@ -99,7 +102,7 @@ export class TasksComponent implements OnInit {
   removeTask(task: Task): void {
     this.taskService.deleteTask(task.id).subscribe(
       () => {
-        console.log('Task deleted:', task);
+        console.log('Task deleted:', task.id);
         this.getTasks();
       },
       (error) => console.error('Error deleting task:', error)

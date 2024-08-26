@@ -34,14 +34,16 @@ export class NewTaskComponent implements OnInit {
     this.getTasks();
   }
 
-  private getTasks(): void {
+  private getTasks() {
     this.taskService.getTasks().subscribe({
       next: (tasks) => {
         this.tasks = tasks;
-        this.cdr.detectChanges(); // Força a detecção de mudanças
+        //this.cdr.detectChanges(); // Força a detecção de mudanças
       },
+      
       error: (err) => console.error('Error fetching tasks:', err)
     });
+    console.log('chamou get')
   }
 
   addTask() {
@@ -54,8 +56,6 @@ export class NewTaskComponent implements OnInit {
       return; // Retorna para evitar enviar dados inválidos
     }
   
-    this.toggleNewTaskForm()
-
     // Cria o novo item de tarefa
     const data: Task = {
       id: this.task.id, // O ID pode ser removido se for gerado automaticamente pelo backend
@@ -69,14 +69,15 @@ export class NewTaskComponent implements OnInit {
     };
   
     // Envia os dados para o serviço
-    this.taskService.createTask(data).subscribe({
-      next: (response) => {
-        console.log('Task added successfully:', response);
-        this.getTasks(); // Atualiza a lista de tarefas
+    this.taskService.createTask(data).subscribe(
+      () => {
+        console.log('Task added successfully:');
         this.resetForm();
-      },
-      error: (err) => console.error('Error adding task:', err)
-    });
+        console.log('passou do reset')
+        this.getTasks(); // Atualiza a lista de tarefas
+      
+      error: () => console.error('Error adding task:')
+    }); 
   }
 
   setTaskEdit(task: Task): void {
@@ -101,7 +102,7 @@ export class NewTaskComponent implements OnInit {
   removeTask(task: Task): void {
     this.taskService.deleteTask(task.id).subscribe(
       () => {
-        console.log('Task deleted:', task);
+        console.log('Task deleted:', task.id);
         this.getTasks();
       },
       (error) => console.error('Error deleting task:', error)
@@ -111,14 +112,14 @@ export class NewTaskComponent implements OnInit {
   updateTask(): void {
     if (!this.isValidTask(this.task)) {
       console.error('Invalid task data');
-      return;      
+      return;
     }
 
     this.toggleNewTaskForm()
-    
+
     this.taskService.editTask(this.task).subscribe(
       (response: Task) => {
-                console.log('Task updated:', response);
+        console.log('Task updated:', response);
         this.getTasks();
         this.resetForm();
       },
