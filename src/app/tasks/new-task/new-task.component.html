@@ -1,0 +1,57 @@
+  <div class="new-task-content">
+    <div class="new-task-top">
+      <p class="new-task-top-title">Nova tarefa</p>
+      <button (click)="toggleNewTaskForm()"><i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+    
+    <div class="new-task-main">
+      <div class="mb-3 new-task-title">
+        <label for="exampleFormControlInput1" class="form-label">Título da tarefa</label>
+        <input type="text" class="form-control input-new-task-name" id="exampleFormControlInput1" [(ngModel)]="task.name">
+      </div>
+
+      <div class="mb-3 new-task-details">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Detalhes da tarefa" [(ngModel)]="task.details"></textarea>
+      </div>
+
+      <div class="deadline-priority">
+        <div class="mb-3 input-task-deadline">
+          <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Deadline" [(ngModel)]="task.deadline">
+        </div>
+        <div class="task-priority">
+          <input class="form-control" list="priorityOptions" id="priorityDataList" placeholder="Prioridade" [(ngModel)]="task.priority">
+          <datalist id="priorityOptions">
+            <option value="Alta">
+            <option value="Média">
+            <option value="Baixa">
+          </datalist>
+        </div>
+      </div>
+        <div class="task-responsible">
+          <input class="form-control" list="responsibleOptions" id="responsibleDataList" placeholder="Responsáveis" [(ngModel)]="task.responsible">
+          <datalist id="responsibleOptions">
+            <option value="San Francisco">
+            <option value="New York">
+            <option value="Seattle">
+            <option value="Los Angeles">
+            <option value="Chicago">
+          </datalist>
+        </div>
+        <div class="mb-3 new-task-status">
+          <label for="exampleFormControlInput1" class="form-label">status</label>
+          <input type="text" class="form-control input-new-task-status" id="exampleFormControlInput1" [(ngModel)]="task.status">
+        </div>
+        <div class="mb-3 new-task-project">
+          <label for="exampleFormControlInput1" class="form-label">project</label>
+          <input type="text" class="form-control input-new-task-project" id="exampleFormControlInput1" [(ngModel)]="task.project">
+        </div>        
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile">
+      </div>
+      <div class="actions">
+        <app-button-cancel (click)="toggleNewTaskForm()"></app-button-cancel>
+        <app-button-new-task (click)="addTask();"></app-button-new-task>
+      </div>
+    </div>
+  </div>

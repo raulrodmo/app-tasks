@@ -1,0 +1,60 @@
+<div class="page-content">
+    <app-header></app-header>
+    <main class="main">
+        <div class="main-content">
+        <app-main></app-main>
+        <div class="main-top">
+            <div class="main-top-content">
+                <p class="title">Olá Fábio,</p>
+                <p>Bem-vindo ao seu gestor de tarefas!</p>
+            </div>
+            <app-button-new-task (click)="mainNewTaskActive()"></app-button-new-task>
+        </div>
+        <div class="cards">
+            <div class="card-content">
+                <div class="card card-to-do">
+                <div class="card-body">
+                    <h5 class="card-title">4</h5>
+                    <p class="card-text">to do</p>
+                </div>
+                <div class="card-icon" style="background: rgba(181, 228, 255, 0.3)">
+                    <img src="../assets/img/to-do.svg" alt="">
+                </div>
+                </div>
+                <div class="card card-doing">
+                <div class="card-body">
+                    <div>
+                    <h5 class="card-title">8</h5>
+                    <a href="">tarefa em atraso</a>
+                    </div>
+                    <p class="card-text">doing</p>
+                </div>
+                <div class="card-icon" style="background: rgba(184, 128, 239, 0.2)">
+                    <img src="../assets/img/doing.svg" alt="">
+                </div>
+                </div>
+                <div class="card card-done">
+                <div class="card-body">
+                    <h5 class="card-title">5</h5>
+                    <p class="card-text">done</p>
+                </div>
+                <div class="card-icon" style="background: rgba(181, 255, 224, 0.3)">
+                    <img src="../assets/img/done.svg" alt="">
+                </div>
+                </div>
+            </div>
+            <div class="graph-of-tasks">
+                <p>
+                #Tarefas concluídas por dia
+                </p>
+                <app-task-period></app-task-period>
+                <div class="graph">
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <div class="new-task new-task-desactive">
+      <app-new-task></app-new-task>
+    </div>
+</div>

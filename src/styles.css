@@ -1,0 +1,451 @@
+*{
+    padding: 0;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.125rem;
+    line-height: 1.4rem;
+}
+
+.page-content{
+    display: flex;
+}
+
+app-header {
+    background-color: #6261B4;
+}
+
+app-header .navbar {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+    display: block;
+}
+
+app-header .navbar .container-fluid {
+    height: 4rem;
+    padding: 0 1rem;
+    margin: 0;
+    background-color: #5554AA;
+    align-items: center;
+}
+
+app-header .navbar .container-fluid .toogle {
+    display: flex;
+    gap: 0;
+}
+
+app-header .navbar .navbar-toggler {
+    width: max-content;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+
+app-header .navbar .navbar-toggler:hover {
+    transform: scale(1.2);
+    transition-duration: 700ms;
+}
+
+app-header .navbar .title {
+    margin: 0;
+    color: #F5F5F5;
+    padding: 0 6rem;
+}
+
+app-header .navbar .title span{
+    font-weight: 700;
+}
+
+app-header .navbar .navbar-select {
+    padding-left: 1rem;
+    margin-top: 4.3rem;
+}
+
+app-header .navbar .navbar-select span{
+    color: white;
+}
+
+app-header .navbar .navbar-select .nav-link {
+    display: flex;
+    gap: .2rem;
+    padding: 1rem;
+    margin-right: 0 !important;
+}
+
+app-header .navbar .navbar-select .nav-link:hover {
+    transform: scale(1.05);
+    transition-duration: 700ms;
+}
+
+app-header .navbar .navbar-select .nav-link span{
+    padding: 0 0.75rem;
+    width: 15rem;
+
+    text-align: left;
+    font-weight: 600;
+    color: #F5F5F5;
+}
+
+app-header .navbar .navbar-select .active span{
+    font-weight: 800;
+}
+
+app-header .navbar .navbar-select .active img{
+    fill: #B5B5D7;
+}
+
+.main{
+    width: -webkit-fill-available;
+    background-color: #F5F5F5;
+}
+
+app-main .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    
+    background-color: #FFFFFF;
+    padding: 1rem 1rem 1rem 2rem;
+    width: -webkit-fill-available;
+    height: 4rem;
+}
+
+app-main .top .form-inline {
+    display: flex;
+    position: relative;
+}
+
+app-main .top .form-inline i {
+    position: absolute;
+    padding: 0;
+    pointer-events: none;
+    color: #263238;
+}
+
+app-main .top .form-inline .form-control{
+    border: none;
+    padding: 0;
+    padding-left: 1.25rem;
+}
+
+app-main .top .form-inline .form-control:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
+app-main .top .profile {
+    border: none;
+}
+
+.main-content .main-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3.8rem;
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.main-content .main-top .main-top-content .breadcrumb{ 
+    margin: 0;
+}
+
+.main-content .main-top .main-top-content .breadcrumb a{ 
+    margin: 0;
+}
+
+app-button-new-task .new-task-button{
+    height: 3.25rem;
+    width: 10.5rem;
+    
+    background-color: #6261B4;
+    --bs-btn-active-bg: #6261B4;
+
+    border-radius: 10px;
+    border: none;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+}
+
+app-button-new-task .new-task-button:hover{
+    transform: scale(1.05);
+    transition-duration: 700ms;
+
+    background-color: #6261B4;
+}
+
+app-button-cancel .cancel-task-button{
+    height: 3.25rem;
+    width: 10.5rem;
+    
+    background-color: rgba(184, 128, 239, 0.2);
+    --bs-btn-active-bg: rgba(184, 128, 239, 0.2);
+    border-radius: 10px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+}
+
+app-button-cancel .cancel-task-button:hover{
+    transform: scale(1.05);
+    transition-duration: 700ms;
+
+    background-color: rgba(184, 128, 239, 0.2);
+}
+
+app-button-new-task .new-task-button p{
+    font-weight: 800;
+    margin: 0;
+}
+
+app-button-cancel .cancel-task-button p{
+    color: #263238; 
+    font-weight: 800;
+    margin: 0;
+}
+
+app-button-new-task .new-task-button p .bi-plus-square{
+    font-size: 24px;;
+}
+
+app-dashboard app-header .navbar .navbar-select .nav-dashboard{
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+app-dashboard .main-content .main-top p{
+    margin: 0;
+}
+
+.main-content .main-top .main-top-content .title{
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 0 .75rem 0;
+}
+
+app-dashboard .main-content .cards .card-content {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 1rem 0 2rem;
+    justify-content: space-between;
+}
+
+app-dashboard .main-content .cards .card-content .card {
+    min-width: 20vw;
+    height: 8.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+app-dashboard .main-content .cards .card-content .card .card-body div{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+app-dashboard .main-content .cards .card-content .card .card-body h5{
+    color: #263238;
+    font-weight: 800;
+    font-size: 2.125rem;
+    line-height: 2.6rem;
+}
+
+app-dashboard .main-content .cards .card-content .card .card-body p{
+    color: #263238;
+    font-weight: 800;
+    font-size: 1.125rem;
+}
+
+app-dashboard .main-content .cards .card-content .card .card-icon{
+    padding: .75rem;
+    border-radius: .625rem;
+    margin: 0 1rem;
+}
+
+app-dashboard .main-content .graph-of-tasks{
+    padding: 3.75rem 1rem 0 2rem;
+}
+
+app-tasks app-header .navbar .navbar-select .nav-tasks{
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+app-tasks {
+    display: block;
+    height: 98vh;
+}
+
+app-tasks .main-content .main-top .main-top-content .breadcrumb{
+    color: #263238;
+    font-weight: 400;
+    margin: 0;
+}
+app-tasks .main-content .main-top .main-top-content .breadcrumb .active{
+    color: #263238;
+}
+
+app-tasks .main-content .main-top .main-top-content .breadcrumb a{
+    color: #263238;
+}
+
+app-tasks .table-top {
+    width: -webkit-fill-available;
+    margin: 2rem 1rem 1rem 2rem;
+
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+app-tasks .table .table-filter{
+    display: flex;
+    gap: 2rem;
+    padding: 2rem 0;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    justify-content: end; 
+}
+
+app-tasks .table .table-filter .form-select{
+    max-width: fit-content;
+    font-weight: 500;
+}
+
+app-tasks .table .table-content{
+    padding: 0 1rem 0 2rem;
+}
+
+app-tasks .table .table-content th{
+    color: #797B7C;
+    width: fit-content;
+    font-size: .875rem;
+    font-weight: 800;
+
+    padding-bottom: 1rem;
+}
+
+app-tasks .table .table-content td{
+    font-size: .938rem;
+    font-weight: 500;
+
+    padding: 1.25rem 0.35rem;
+    color: #263238;
+}
+
+app-tasks .table .table-content .options{
+    display: flex;
+    gap: .875rem;
+    justify-content: end;
+}
+
+app-tasks .table .table-content td button{
+    border: none;
+    background: none;
+}
+
+app-tasks .table thead{
+    border-bottom: #E8EEF0 3px solid;
+}
+
+.new-task-desactive{
+    display: none;
+}
+
+.new-task-active{
+    display: block;
+    width: 100vw;
+
+    position: fixed;
+    background-color: rgba(10,23,55,0.5);
+}
+
+.new-task-content{
+    width: fit-content;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.new-task-content .new-task-top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem 0 3.125rem;
+}
+
+.new-task-content .new-task-top p{
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    position: absolute;
+    margin: 0;
+
+    color: #263238;
+}
+
+.new-task-content .new-task-top button{
+    position: sticky;
+    left: 100%;
+
+    margin-right: 2rem;
+    border: none;
+    background: none;
+
+}
+
+.new-task-content .new-task-top button i{
+    font-size: 1.875rem;
+    color: #263238;
+}
+
+.new-task-content .new-task-main{
+    margin: 0 6.875rem 3rem;
+}
+
+.new-task-content .new-task-main .new-task-title label{
+    position: relative;
+    top: 1.2rem;
+    left: 1.25rem;
+
+    background: white;
+    color: #797B7C;
+
+    font-weight: 600;
+    font-size: .75rem;
+}
+
+.new-task-content .form-control{
+    color: #263238;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.new-task-content .input-task-priority select{
+    color: #263238;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.new-task-content .deadline-priority{
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-task-content .custom-file{
+    margin: 1.25rem 0;
+}
+
+.new-task-content .actions{
+    display: flex;
+    justify-content: center;
+    gap: .75rem;
+}

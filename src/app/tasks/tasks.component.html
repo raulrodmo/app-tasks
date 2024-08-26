@@ -1,0 +1,82 @@
+<div class="page-content">
+    <app-header></app-header>
+    <main class="main">
+        <div class="main-content">
+            <app-main></app-main>
+            <div class="main-top">
+                <div class="main-top-content">
+                <p class="title">Tarefas</p>
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Tarefas</li>
+                        </ol>
+                    </nav>
+                </div>
+                <app-button-new-task (click)="toggleNewTaskForm()"></app-button-new-task>
+            </div>
+
+            </div>
+            <div class="table table-top">
+                <div class="table-filter">
+                    <select class="form-select project-select" aria-label="Default select example">
+                        <option selected>Projetos</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <select class="form-select status-select" aria-label="Default select example">
+                        <option selected>Status</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <select class="form-select priority-select" aria-label="Default select example">
+                        <option selected>Todas Prioridades</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <select class="form-select period-select" aria-label="Default select example">
+                        <option selected>Últimos 30 dias</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div>
+                <div class="table-content">
+                    <table class="table table-hover table-sm ">
+                        <thead>
+                          <tr>
+                            <th scope="col col-task">Tarefa</th>
+                            <th scope="col col-priority">Prior.</th>
+                            <th scope="col col-project">Projeto</th>
+                            <th scope="col col-status">Status</th>
+                            <th scope="col col-responsible">Respons.</th>
+                            <th scope="col col-Deadline">Deadline</th>
+                            <th scope="col col-options"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let task of tasks">
+                            <td>{{task.name}}</td>
+                            <td>{{task.priority}}</td>
+                            <td>{{task.project}}</td>
+                            <td>{{task.status}}</td>
+                            <td>{{task.responsible}}</td>
+                            <td>{{task.deadline}}</td>
+                            <td class="options">
+                              <app-button-delete (click)="setTaskEdit(task); removeTask(task)"></app-button-delete>
+                              <app-button-view></app-button-view>
+                              <app-button-edit (click)="updateTask();" ></app-button-edit>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </main>
+    <div class="new-task new-task-desactive">
+      <app-new-task></app-new-task>
+    </div>
+</div>
