@@ -7,6 +7,8 @@ import { OrderModule  } from 'ngx-order-pipe';
 import { HttpClientModule } from '@angular/common/http'
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 import { InMemTaskService } from '../database/data.services'
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +22,6 @@ import { ButtonCancelComponent } from './main/button-cancel/button-cancel.compon
 import { ButtonDeleteComponent } from './tasks/button-delete/button-delete.component';
 import { ButtonViewComponent } from './tasks/button-view/button-view.component';
 import { ButtonEditComponent } from './tasks/button-edit/button-edit.component';
-import { NewTaskComponent } from './tasks/new-task/new-task.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { NewTaskComponent } from './tasks/new-task/new-task.component';
     ButtonDeleteComponent,
     ButtonViewComponent,
     ButtonEditComponent,
-    NewTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +43,8 @@ import { NewTaskComponent } from './tasks/new-task/new-task.component';
     AppRoutingModule,
     OrderModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemTaskService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemTaskService),
+    NgApexchartsModule
   ],
   providers: [[provideRouter(routes)]],
   bootstrap: [AppComponent]

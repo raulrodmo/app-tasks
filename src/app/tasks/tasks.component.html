@@ -13,7 +13,7 @@
                         </ol>
                     </nav>
                 </div>
-                <app-button-new-task (click)="toggleNewTaskForm()"></app-button-new-task>
+                <app-button-new-task (click)="resetForm(); toggleNewTaskForm()"></app-button-new-task>
             </div>
 
             </div>
@@ -66,9 +66,9 @@
                             <td>{{task.responsible}}</td>
                             <td>{{task.deadline}}</td>
                             <td class="options">
-                              <app-button-delete (click)="setTaskEdit(task); removeTask(task)"></app-button-delete>
-                              <app-button-view></app-button-view>
-                              <app-button-edit (click)="updateTask();" ></app-button-edit>
+                              <app-button-delete (click)="removeTask(task)"></app-button-delete>
+                              <app-button-view (click)="toggleNewTaskForm()"></app-button-view>
+                              <app-button-edit (click)="setTaskEdit(task) ; toggleNewTaskForm()" ></app-button-edit>
                             </td>
                           </tr>
                         </tbody>
@@ -77,6 +77,67 @@
             </div>
     </main>
     <div class="new-task new-task-desactive">
-      <app-new-task></app-new-task>
+      <div class="new-task-content">
+        <div class="new-task-top">
+          <p class="new-task-top-title">Nova tarefa</p>
+          <button (click)="resetForm();toggleNewTaskForm()"><i class="bi bi-x-circle"></i>
+          </button>
+        </div>
+        
+        <div class="new-task-main">
+          <div class="mb-3 new-task-title">
+            <label for="exampleFormControlInput1" class="form-label">Título da tarefa</label>
+            <input type="text" class="form-control input-new-task-name" id="exampleFormControlInput1" [(ngModel)]="task.name">
+          </div>
+    
+          <div class="mb-3 new-task-details">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Detalhes da tarefa" [(ngModel)]="task.details"></textarea>
+          </div>
+    
+          <div class="deadline-priority">
+            <div class="mb-3 input-task-deadline">
+              <label for="exampleFormControlInput1" class="form-label">Deadline</label>
+              <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Deadline" [(ngModel)]="task.deadline">
+            </div>
+            <div class="task-priority">
+              <label for="exampleFormControlInput1" class="form-label">Prioridade</label>
+              <select id="priorityOptions" class="form-select period-select" aria-label="Default select example" [(ngModel)]="task.priority">
+                <option value="alta">Alta</option>
+                <option value="media">Média</option>
+                <option value="baixa">Baixa</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="task-responsible">
+              <label for="exampleFormControlInput1" class="form-label">Responsável</label>
+              <input class="form-control" list="responsibleOptions" id="responsibleDataList" [(ngModel)]="task.responsible">
+              <datalist id="responsibleOptions">
+                <option *ngFor="let task of tasks" value={{task.responsible}}>
+              </datalist>
+            </div>
+
+            <div class="new-task-status">
+              <label for="exampleFormControlInput1" class="form-label">Status</label>
+              <select id="priorityOptions" class="form-select period-select" aria-label="Default select example" [(ngModel)]="task.status">
+                <option value="to do">ToDo</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+            
+            <div class="mb-3 new-task-project">
+              <label for="exampleFormControlInput1" class="form-label">Projeto</label>
+              <input class="form-control" list="projectOptions" id="projectDataList" [(ngModel)]="task.project">
+              <datalist id="projectOptions">
+                <option *ngFor="let task of tasks" value={{task.project}}>
+              </datalist>
+            </div>        
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+          </div>
+          <div class="actions">
+            <app-button-cancel (click)="resetForm() ; toggleNewTaskForm()"></app-button-cancel>
+            <app-button-new-task (click)="toggleNewTaskForm() ; addTask(task);"></app-button-new-task>
     </div>
 </div>

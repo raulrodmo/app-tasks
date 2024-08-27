@@ -15,30 +15,31 @@ export class TasksComponent implements OnInit {
   }
 
   task: Task = {
-    id: this.generateRandomId(), // O ID será atribuído pelo serviço quando a tarefa for criada
+    id: this.generateRandomId(), 
     name: '',
     details: '',
     priority: '',
     project: '',
     status: '',
     responsible: '',
-    deadline: new Date().toISOString().split('T')[0] // Inicialmente a data de vencimento é a data atual
+    deadline: new Date().toISOString().split('T')[0] 
   };
 
-  editMode = false; // Renomeado de 'edit' para 'editMode' para clareza
+  editMode = false; 
   tasks: Task[] = [];
 
   constructor(private taskService: TaskService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getTasks();
+    console.log('ngOnInit')
   }
 
   private getTasks() {
     this.taskService.getTasks().subscribe({
       next: (tasks) => {
         this.tasks = tasks;
-        //this.cdr.detectChanges(); // Força a detecção de mudanças
+        //this.cdr.detectChanges(); 
       },
       
       error: (err) => console.error('Error fetching tasks:', err)
@@ -46,19 +47,17 @@ export class TasksComponent implements OnInit {
     console.log('chamou get')
   }
 
-  addTask() {
-    // Adiciona mensagens de depuração para verificar o estado dos dados
+  addTask(task: Task) {
+    
     console.log('Task data before adding:', this.task);
   
-    // Verifica se todos os campos obrigatórios estão preenchidos
     if (!this.task.name || !this.task.priority || !this.task.project || !this.task.status || !this.task.responsible || !this.task.deadline) {
       console.error('Invalid task data. Ensure all fields are filled.');
-      return; // Retorna para evitar enviar dados inválidos
+      return; 
     }
   
-    // Cria o novo item de tarefa
     const data: Task = {
-      id: this.task.id, // O ID pode ser removido se for gerado automaticamente pelo backend
+      id: this.task.id,
       name: this.task.name,
       details: this.task.details,
       priority: this.task.priority,
@@ -68,16 +67,15 @@ export class TasksComponent implements OnInit {
       deadline: this.task.deadline
     };
   
-    // Envia os dados para o serviço
-    this.taskService.createTask(data).subscribe(
-      () => {
-        console.log('Task added successfully:');
+    this.taskService.createTask(data).subscribe({
+      next: (response) => {
+        console.log('Task added successfully:', response);
+        this.getTasks(); 
         this.resetForm();
-        console.log('passou do reset')
-        this.getTasks(); // Atualiza a lista de tarefas
-      
-      error: () => console.error('Error adding task:')
-    }); 
+      },
+      error: (err) => console.error('Error adding task:', err)
+    });
+
   }
 
   setTaskEdit(task: Task): void {
@@ -86,8 +84,9 @@ export class TasksComponent implements OnInit {
   }
 
   resetForm(): void {
+    console.log('resetting form');
     this.task = {
-      id: this.generateRandomId(), // O ID será atribuído pelo serviço quando a tarefa for criada
+      id: this.generateRandomId(), 
       name: '',
       details: '',
       priority: '',

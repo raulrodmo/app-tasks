@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit,  ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../tasks/task.model';
+import { TaskService } from '../tasks/task.service';
 import { count, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,10 +12,150 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class DashboardComponent {
+  generateRandomId(): number {
+    return Math.floor(Math.random() * 10000);
+  }
 
-  mainNewTaskActive() {
+  task: Task = {
+    id: this.generateRandomId(),
+    name: '',
+    details: '',
+    priority: '',
+    project: '',
+    status: '',
+    responsible: '',
+    deadline: new Date().toISOString().split('T')[0]
+  };
+
+  editMode = false;
+  tasks: Task[] = [];
+
+  constructor(private taskService: TaskService, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.getTasks();
+    console.log('ngOnInit')
+  }
+
+  getTaskDone(){
+    const tasksDone = this.tasks
+    const tasksDoneFiltered = tasksDone.filter(task => task.status === 'done').length
+    console.log(tasksDoneFiltered)
+    return tasksDoneFiltered
+  }
+
+  getTaskDoing(){
+    const tasksDoing = this.tasks
+    const tasksDoingFiltered = tasksDoing.filter(task => task.status === 'doing').length
+    console.log(tasksDoingFiltered)
+    return tasksDoingFiltered
+  }
+
+  getTaskToDo(){
+    const tasksToDo = this.tasks
+    const tasksToDoFiltered = tasksToDo.filter(task => task.status === 'to do').length
+    console.log(tasksToDoFiltered)
+    return tasksToDoFiltered
+  }
+
+  private getTasks() {
+    this.taskService.getTasks().subscribe({
+      next: (tasks) => {
+        this.tasks = tasks;
+      },
+      
+      error: (err) => console.error('Error fetching tasks:', err)
+    });
+    console.log('chamou get')
+  }
+
+  addTask(task: Task) {
+    
+    console.log('Task data before adding:', this.task);
+  
+    if (!this.task.name || !this.task.priority || !this.task.project || !this.task.status || !this.task.responsible || !this.task.deadline) {
+      console.error('Invalid task data. Ensure all fields are filled.');
+      return;
+    }
+  
+    const data: Task = {
+      id: this.task.id,
+      name: this.task.name,
+      details: this.task.details,
+      priority: this.task.priority,
+      project: this.task.project,
+      status: this.task.status,
+      responsible: this.task.responsible,
+      deadline: this.task.deadline
+    };
+  
+    this.taskService.createTask(data).subscribe({
+      next: (response) => {
+        console.log('Task added successfully:', response);
+        this.getTasks(); 
+        this.resetForm();
+      },
+      error: (err) => console.error('Error adding task:', err)
+    });
+
+  }
+
+  setTaskEdit(task: Task): void {
+    this.task = { ...task };
+    this.editMode = true;
+  }
+
+  resetForm(): void {
+    this.task = {
+      id: this.generateRandomId(),
+      name: '',
+      details: '',
+      priority: '',
+      project: '',
+      status: '',
+      responsible: '',
+      deadline: new Date().toISOString().split('T')[0]
+    };
+    this.editMode = false;
+  }
+
+  removeTask(task: Task): void {
+    this.taskService.deleteTask(task.id).subscribe(
+      () => {
+        console.log('Task deleted:', task.id);
+        this.getTasks();
+      },
+      (error) => console.error('Error deleting task:', error)
+    );
+  }
+
+  updateTask(): void {
+    if (!this.isValidTask(this.task)) {
+      console.error('Invalid task data');
+      return;
+    }
+
+    this.toggleNewTaskForm()
+
+    this.taskService.editTask(this.task).subscribe(
+      (response: Task) => {
+        console.log('Task updated:', response);
+        this.getTasks();
+        this.resetForm();
+      },
+      (error) => console.error('Error updating task:', error)
+    );
+  }
+
+  private isValidTask(task: Task): boolean {
+    return task.name.trim().length > 0 && task.priority.trim().length > 0 && task.project.trim().length > 0;
+  }
+
+  toggleNewTaskForm(): void {
     const mainNewTask = document.querySelector('.new-task');
-    mainNewTask?.classList.toggle('new-task-active')
-    mainNewTask?.classList.toggle('new-task-desactive')
+    if (mainNewTask) {
+      mainNewTask.classList.toggle('new-task-active');
+      mainNewTask.classList.toggle('new-task-desactive');
+    }
   }
 }
